@@ -70,18 +70,18 @@
             </section>
             <section class="popup">
                 <button class="popup__close-button"></button>
-                <div class="popup__container">
+                <form class="popup__container">
                     <h2 class="popup__text">Редактировать профиль</h2>
                     <div class="popup__field-first">
-                        <p class="popup__field-text">Жак-Ив Кусто</p>
+                        <input class="popup__field-text popup__name" name ="name">
                     </div>
                     <div class="popup__field-second">
-                        <p class="popup__field-text">Исследователь океана</p>
+                        <input class="popup__field-text popup__job" name ="job">
                     </div>
-                    <div class="popup__submit-button">
+                    <button type="submit" class="popup__submit-button">
                         <p class="popup__submit-text">Сохранить</p>
-                    </div>
-                </div>
+                    </button>
+                </form>
             </section>
         </main>
         <footer class="footer">

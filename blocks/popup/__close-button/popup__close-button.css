@@ -2,11 +2,15 @@
     margin: 0;
     margin-left: 8px;
     margin-bottom: 370px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0);
     border: 0;
     width: 32px;
     height: 32px;
     background-image: url(../../../images/close-button.svg);
+}
+.popup__close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 @media screen and (max-width: 480px) {
     .popup__close-button {

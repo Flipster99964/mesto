@@ -7,3 +7,12 @@
     background: #000000;
     border-radius: 2px;
 }
+.popup__submit-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+@media screen and (max-width: 480px) {
+    .popup__submit-button {
+      width: 238px;
+    }
+  }

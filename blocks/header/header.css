@@ -5,3 +5,15 @@
     width: 880px;
     min-height: 74px;
 }
+@media screen and (max-width: 880px) {
+    .header {
+      width: 600px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .header {
+      width: 320px;
+      padding-top: 28px;
+      min-height: 56px;
+    }
+  }
