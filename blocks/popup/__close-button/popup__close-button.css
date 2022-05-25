@@ -14,7 +14,10 @@
 }
 @media screen and (max-width: 480px) {
     .popup__close-button {
-        margin-left: 250px;
-        margin-bottom: 16px;
+      width: 20px;
+      height: 20px;
+      margin-left: 262px;
+      margin-bottom: 16px;
+      background-image: url(../../../images/close-button_mobile.svg);
     }
   }
