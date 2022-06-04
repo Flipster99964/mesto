@@ -24,6 +24,7 @@ const initialCards = [
       link: 'images/trost.png'
     }
   ]; 
+  initialCards.reverse();
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const closeButton = document.querySelector('.popup__close-button');
@@ -41,67 +42,69 @@ const addButton = document.querySelector('.profile__add-button');
 const addName = document.querySelector('.add__name');
 const addLink = document.querySelector('.add__link');
 const cardsContainer = document.querySelector('.elements');
+const imagePopup = document.querySelector('.imagePopup');
+const imagePopupImage = document.querySelector('.imagePopup__image');
+const imageCloseButton = document.querySelector('.imagePopup__close-button')
+const cardTemplate = document.querySelector('#element').content; 
+const cards = document.querySelector('.elements');
+const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+const cardElement1 = cardTemplate.querySelector('.element').cloneNode(true);
+const cardElement2 = cardTemplate.querySelector('.element').cloneNode(true);
+const cardElement3 = cardTemplate.querySelector('.element').cloneNode(true);
+const cardElement4 = cardTemplate.querySelector('.element').cloneNode(true);
+const cardElement5 = cardTemplate.querySelector('.element').cloneNode(true);
+cardElement.querySelector('.element__image').src = initialCards[0].link;
+cardElement.querySelector('.element__text').textContent = initialCards[0].name;
+cardElement1.querySelector('.element__image').src = initialCards[1].link;
+cardElement1.querySelector('.element__text').textContent = initialCards[1].name;
+cardElement2.querySelector('.element__image').src = initialCards[2].link;
+cardElement2.querySelector('.element__text').textContent = initialCards[2].name;
+cardElement3.querySelector('.element__image').src = initialCards[3].link;
+cardElement3.querySelector('.element__text').textContent = initialCards[3].name;
+cardElement4.querySelector('.element__image').src = initialCards[4].link;
+cardElement4.querySelector('.element__text').textContent = initialCards[4].name;
+cardElement5.querySelector('.element__image').src = initialCards[5].link;
+cardElement5.querySelector('.element__text').textContent = initialCards[5].name;
+cards.prepend(cardElement); 
+cards.prepend(cardElement1); 
+cards.prepend(cardElement2); 
+cards.prepend(cardElement3); 
+cards.prepend(cardElement4); 
+cards.prepend(cardElement5); 
 
-function addCard() {
-  cardsContainer.insertAdjacentHTML('afterbegin', `
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[0].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[0].name}</h2>
-      <button type="button" class="element__like-button"></button>
-  </div>
-</div>
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[1].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[1].name}</h2>
-      <button type="button" class="element__like-button"></button>
-  </div>
-</div>
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[2].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[2].name}</h2>
-      <button type="button" class="element__like-button"></button>
-  </div>
-</div>
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[3].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[3].name}</h2>
-      <button type="button" class="element__like-button"></button>
-  </div>
-</div>
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[4].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[4].name}</h2>
-      <button type="button" class="element__like-button"></button>
-  </div>
-</div>
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[5].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[5].name}</h2>
-      <button type="button" class="element__like-button"></button>
-  </div>
-</div>
-  `);
+
+function popupImage() {                                       //popup с картинкой
+const image = document.querySelectorAll('.element__image');   
+const imageArr = Array.from(image);
+imageArr.forEach(function(elem) {
+  elem.addEventListener('click', function() {
+    imagePopup.classList.add("imagePopup_opened");
+    imagePopupImage.src = elem.getAttribute('src');
+});
+});
 }
-addCard();
-
-function popupOpened() {
+popupImage();
+function popupImageNew() {                                       
+  const imageNew = document.querySelectorAll('#element-image');
+  const imageNewArr = Array.from(imageNew);
+  const imageArrAll = likeButtonArr.concat(imageNewArr.slice(0, 1));
+  imageArrAll.forEach(function(elem) {
+    elem.addEventListener('click', function() {
+      imagePopup.classList.add("imagePopup_opened");
+      imagePopupImage.src = elem.getAttribute('src');
+  });
+  });
+  }
+function imageClosed() {
+      imagePopup.classList.remove("imagePopup_opened");
+    } 
+    imageCloseButton.addEventListener('click', imageClosed); 
+function popupOpened() {                                   //popup
     popup.classList.add("popup_opened");
     nameInput.value = nameInputNew.textContent;
     jobInput.value = jobInputNew.textContent;
 } 
-profileEditButton.addEventListener('click', popupOpened); 
+profileEditButton.addEventListener('click', popupOpened);
 function popupClosed() {
     popup.classList.remove("popup_opened");
 } 
@@ -113,7 +116,9 @@ function formSubmitHandler (evt) {
     popupClosed();
 }
 formElement.addEventListener('submit', formSubmitHandler);
-function addedFormOpened() {
+
+
+function addedFormOpened() {                      //добавление карточки
     addedForm.classList.add("popup_opened");
     addName.placeholder = 'Название';
     addLink.placeholder = 'Ссылка на картинку';
@@ -129,31 +134,30 @@ function addedFormSubmitHandler (evt) {
     name: addName.value,
     link: addLink.value
   })
-  cardsContainer.insertAdjacentHTML('afterbegin', `
-<div class="element">
-  <button class="element__delete-button"></button>
-  <img src="${initialCards[0].link}" class="element__image" alt="изображение места">
-  <div class="element__block">
-      <h2 class="element__text">${initialCards[0].name}</h2>
-      <button type="button" id="like-button" class="element__like-button element__like-buttonNew"></button>
-  </div>
-</div>
-`);
+  const cardElementNew = cardTemplate.querySelector('.element').cloneNode(true);
+  cardElementNew.querySelector('.element__image').src = initialCards[0].link;
+  cardElementNew.querySelector('.element__text').textContent = initialCards[0].name;
+  cardElementNew.querySelector('.element__like-button').id = 'like-button';
+  cardElementNew.querySelector('.element__image').id = 'element-image';
+  cards.prepend(cardElementNew);
   addedFormClosed();
 };
 addedFormElement.addEventListener('submit', addedFormSubmitHandler);
 addedFormElement.addEventListener('submit', AddLikeCard);
 addedFormElement.addEventListener('submit', AddLike);
+addedFormElement.addEventListener('submit', AddDelete);
+addedFormElement.addEventListener('submit', AddDeleteCard);
+addedFormElement.addEventListener('submit', popupImageNew);
 const likeButton = cardsContainer.querySelectorAll('.element__like-button');
 const likeButtonArr = Array.from(likeButton);
 const deleteButton = cardsContainer.querySelectorAll('.element__delete-button');
 const deleteButtonArr = Array.from(deleteButton);
-function AddLikeCard() {
+
+
+function AddLikeCard() {                                                        //лайки
   const likeButtonNew = document.querySelectorAll('#like-button');
   const likeButtonNewArr = Array.from(likeButtonNew);
   const likeButtonArrAll = likeButtonArr.concat(likeButtonNewArr.slice(0, 1));
-  console.log(likeButtonArrAll);
-  console.log(likeButtonArr);
   likeButtonArrAll.forEach(function(elem) {
     elem.addEventListener('click', function() {
       if (elem.classList.contains("element__like-button_active")) {
@@ -178,4 +182,24 @@ likeButtonArr.forEach(function(elem) {
   });
 };
 AddLike();
+
+
+function AddDeleteCard() {                                                        //удаление карточки 
+  const deleteButtonNew = document.querySelectorAll('#delete-button');  
+  const deleteButtonNewArr = Array.from(deleteButtonNew);
+  const deleteButtonArrAll = deleteButtonArr.concat(deleteButtonNewArr.slice(0, 1));
+  deleteButtonArrAll.forEach(function(elem) {
+    elem.addEventListener('click', function() { 
+      elem.parentNode.remove();
+    });
+    });
+    };
+function AddDelete() {
+deleteButtonArr.forEach(function(elem) {
+  elem.addEventListener('click', function() {
+    elem.parentNode.remove();
+  });
+  });
+};
+AddDelete();
 

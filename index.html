@@ -25,6 +25,16 @@
                     <button type="button" class="profile__add-button"></button>
             </section>
             <section class="elements">
+                <template id="element">
+                <div class="element">
+                    <button class="element__delete-button" id="delete-button"></button>
+                  <img class="element__image" alt="изображение места">
+                    <div class="element__block">
+                        <h2 class="element__text"></h2>
+                        <button type="button" class="element__like-button"></button>
+                    </div>
+                  </div>
+                </template>
             </section>
         </main>
         <footer class="footer">
@@ -55,6 +65,13 @@
                 </div>
                 <button type="submit" class="addedForm__submit-button popup__submit-text">Создать</button>
             </form>
+        </section>
+        <section class="imagePopup">
+            <div class="imagePopup__container">
+                    <button type="button" class="imagePopup__close-button"></button>
+                    <img class="imagePopup__image" alt="изображение места">
+                    <p class="imagePopup__text"></p>
+            </div>
         </section>
     </div>
     <script src="scripts/index.js"></script>
