@@ -73,9 +73,9 @@ cards.prepend(cardElement4);
 cards.prepend(cardElement5); 
 
 
-function popupImage() {                                       //popup с картинкой
-const image = document.querySelectorAll('.element__image');   
+const image = document.querySelectorAll('.element__image');    //popup с картинкой
 const imageArr = Array.from(image);
+function popupImage() {                               
 imageArr.forEach(function(elem) {
   elem.addEventListener('click', function() {
     imagePopup.classList.add("imagePopup_opened");
@@ -87,7 +87,7 @@ popupImage();
 function popupImageNew() {                                       
   const imageNew = document.querySelectorAll('#element-image');
   const imageNewArr = Array.from(imageNew);
-  const imageArrAll = likeButtonArr.concat(imageNewArr.slice(0, 1));
+  const imageArrAll = imageArr.concat(imageNewArr.slice(0, 1));
   imageArrAll.forEach(function(elem) {
     elem.addEventListener('click', function() {
       imagePopup.classList.add("imagePopup_opened");

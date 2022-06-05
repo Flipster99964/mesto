@@ -4,8 +4,15 @@
     position: relative;
     word-wrap: wrap;
     max-width: 75vw;
-    display: flex;
+    min-width: 25vw;
+    max-height: 75vh;
+    min-height: 25vh;
     flex-direction: column;
     align-items: center;
     z-index: 3;
 }
+@media screen and (max-width: 480px) {
+    .imagePopup__container {
+
+    }
+  }
