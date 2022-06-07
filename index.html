@@ -28,7 +28,7 @@
                 <template id="element">
                 <div class="element">
                     <button class="element__delete-button" id="delete-button"></button>
-                  <img class="element__image" alt="изображение места">
+                    <img class="element__image" alt="изображение места">
                     <div class="element__block">
                         <h2 class="element__text"></h2>
                         <button type="button" class="element__like-button"></button>
@@ -40,30 +40,22 @@
         <footer class="footer">
             <p class="footer__copyright">&#169; 2022 Егор Сибирев</p>
         </footer>
-        <section class="popup">
+        <section class="popup popup_profile">
             <button type="button" class="popup__close-button"></button>
             <form name="popup-form" class="popup__container">
                 <h2 class="popup__text">Редактировать профиль</h2>
-                <div class="popup__field-first">
-                    <input class="popup__field-text popup__name" name ="name">
-                </div>
-                <div class="popup__field-second">
-                    <input class="popup__field-text popup__job" name ="job">
-                </div>
+                    <input class="popup__field-text popup__name" placeholder = "Имя" required name ="name">
+                    <input class="popup__field-text popup__job" placeholder = "Работа" required name ="job">
                 <button type="submit" class="popup__submit-button popup__submit-text">Сохранить</button>
             </form>
         </section>
-        <section class="popup addedForm">
-            <button type="button" class="popup__close-button addedForm__close-button"></button>
-            <form name="added-form" class="addedForm__container">
+        <section class="popup popup_added-form">
+            <button type="button" class="popup__close-button popup_added-form__close-button"></button>
+            <form name="added-form" class="popup_added-form__container popup__container">
                 <h2 class="popup__text">Новое место</h2>
-                <div class="popup__field-first">
-                    <input class="popup__field-text popup__add-name" name ="name">
-                </div>
-                <div class="popup__field-second">
-                    <input class="popup__field-text popup__add-link" name ="job">
-                </div>
-                <button type="submit" class="addedForm__submit-button popup__submit-text">Создать</button>
+                    <input class="popup__field-text popup__add-name" placeholder = "Название" required name ="name">
+                    <input class="popup__field-text popup__add-link" placeholder = "Ссылка на картинку" required name ="link">
+                <button type="submit" class="popup__submit-button popup__submit-text">Создать</button>
             </form>
         </section>
         <section class="imagePopup">
