@@ -1,8 +1,7 @@
-.imagePopup__container {
+.popup_imagePopup-container {
     margin: 5px;
     padding: 0;
     position: relative;
-    word-wrap: wrap;
     max-width: 75vw;
     min-width: 25vw;
     max-height: 75vh;
@@ -11,8 +10,3 @@
     align-items: center;
     z-index: 3;
 }
-@media screen and (max-width: 480px) {
-    .imagePopup__container {
-
-    }
-  }

@@ -1,8 +1,4 @@
-.imagePopup {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
-    position: fixed;
+.popup_imagePopup {
     top: 0;
     background-color: rgba(0, 0, 0, 0.9);
     max-width: 1280px;

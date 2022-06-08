@@ -41,10 +41,10 @@ const addButton = document.querySelector('.profile__add-button');
 const addName = document.querySelector('.popup__add-name');
 const addLink = document.querySelector('.popup__add-link');
 const cardsContainer = document.querySelector('.elements');
-const imagePopup = document.querySelector('.imagePopup');
-const imagePopupImage = document.querySelector('.imagePopup__image');
-const imageCloseButton = document.querySelector('.imagePopup__close-button');
-const imagePopupText = document.querySelector('.imagePopup__text');
+const imagePopup = document.querySelector('.popup_imagePopup');
+const imagePopupImage = document.querySelector('.popup_imagePopup-image');
+const imageCloseButton = document.querySelector('.popup_imagePopup-close-button');
+const imagePopupText = document.querySelector('.popup_imagePopup-text');
 const cardTemplate = document.querySelector('#element').content; 
 const cards = document.querySelector('.elements');
 const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -78,7 +78,7 @@ const imageArr = Array.from(image);
 function popupImage() {                               
 imageArr.forEach(function(elem) {
   elem.addEventListener('click', function() {
-    imagePopup.classList.add("imagePopup_opened");
+    imagePopup.classList.add("popup_opened");
     imagePopupImage.src = elem.getAttribute('src');
     imagePopupText.textContent = elem.closest('div').lastElementChild.firstElementChild.textContent;
 });
@@ -91,14 +91,14 @@ function popupImageNew() {
   const imageArrAll = imageArr.concat(imageNewArr.slice(0, 1));
   imageArrAll.forEach(function(elem) {
     elem.addEventListener('click', function() {
-      imagePopup.classList.add("imagePopup_opened");
+      imagePopup.classList.add("popup_opened");
       imagePopupImage.src = elem.getAttribute('src');
       imagePopupText.textContent = elem.closest('div').lastElementChild.firstElementChild.textContent;
   });
   });
   }
 function imageClosed() {
-      imagePopup.classList.remove("imagePopup_opened");
+      imagePopup.classList.remove("popup_opened");
     } 
     imageCloseButton.addEventListener('click', imageClosed); 
 function popupOpened() {                                   //popup
@@ -122,6 +122,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 function addedFormOpened() {                      //добавление карточки
     addedForm.classList.add("popup_opened");
+    console.log('привет');
 } 
 addButton.addEventListener('click', addedFormOpened); 
 function addedFormClosed() {
@@ -203,4 +204,3 @@ deleteButtonArr.forEach(function(elem) {
   });
 };
 AddDelete();
-
