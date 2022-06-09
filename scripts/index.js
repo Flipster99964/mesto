@@ -1,29 +1,3 @@
-const initialCards = [
-    {
-      name: 'Шиганшина',
-      link: 'images/Shiganshina_in_anime.png'
-    },
-    {
-      name: 'Стохес',
-      link: 'images/Stohess_anime.png'
-    },
-    {
-      name: 'Замок Утгард',
-      link: 'images/castle.jpg'
-    },
-    {
-      name: 'Лес гигантских деревьев',
-      link: 'images/The_Forest_of_the_Giant_Trees.png'
-    },
-    {
-      name: 'Даупер',
-      link: 'images/dowper.png'
-    },
-    {
-      name: 'Трост',
-      link: 'images/trost.png'
-    }
-  ]; 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
 const closeButton = document.querySelector('.popup__close-button');
@@ -34,7 +8,6 @@ const jobInputNew = document.querySelector('.profile__description');
 const nameInputNew = document.querySelector('.profile__name');
 const formElement = document.querySelector('.popup__container');
 const addedFormElement = document.querySelector('.popup_added-form__container');
-const cardLink = document.querySelector('.element__image');
 const cardName = document.querySelector('.element__text');
 const addedForm = document.querySelector('.popup_added-form');
 const addButton = document.querySelector('.profile__add-button');
@@ -48,69 +21,73 @@ const imagePopupText = document.querySelector('.popup_imagePopup-text');
 const cardTemplate = document.querySelector('#element').content; 
 const cards = document.querySelector('.elements');
 const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-const cardElement1 = cardTemplate.querySelector('.element').cloneNode(true);
-const cardElement2 = cardTemplate.querySelector('.element').cloneNode(true);
-const cardElement3 = cardTemplate.querySelector('.element').cloneNode(true);
-const cardElement4 = cardTemplate.querySelector('.element').cloneNode(true);
-const cardElement5 = cardTemplate.querySelector('.element').cloneNode(true);
-cardElement.querySelector('.element__image').src = initialCards[0].link;
-cardElement.querySelector('.element__text').textContent = initialCards[0].name;
-cardElement1.querySelector('.element__image').src = initialCards[1].link;
-cardElement1.querySelector('.element__text').textContent = initialCards[1].name;
-cardElement2.querySelector('.element__image').src = initialCards[2].link;
-cardElement2.querySelector('.element__text').textContent = initialCards[2].name;
-cardElement3.querySelector('.element__image').src = initialCards[3].link;
-cardElement3.querySelector('.element__text').textContent = initialCards[3].name;
-cardElement4.querySelector('.element__image').src = initialCards[4].link;
-cardElement4.querySelector('.element__text').textContent = initialCards[4].name;
-cardElement5.querySelector('.element__image').src = initialCards[5].link;
-cardElement5.querySelector('.element__text').textContent = initialCards[5].name;
-cards.append(cardElement); 
-cards.append(cardElement1); 
-cards.append(cardElement2); 
-cards.append(cardElement3); 
-cards.append(cardElement4); 
-cards.append(cardElement5); 
 
 
-const image = document.querySelectorAll('.element__image');    //popup с картинкой
-const imageArr = Array.from(image);
-function popupImage() {                               
-imageArr.forEach(function(elem) {
-  elem.addEventListener('click', function() {
-    imagePopup.classList.add("popup_opened");
-    imagePopupImage.src = elem.getAttribute('src');
-    imagePopupText.textContent = elem.closest('div').lastElementChild.firstElementChild.textContent;
-});
-});
-}
-popupImage();
-function popupImageNew() {                                       
-  const imageNew = document.querySelectorAll('#element-image');
-  const imageNewArr = Array.from(imageNew);
-  const imageArrAll = imageArr.concat(imageNewArr.slice(0, 1));
-  imageArrAll.forEach(function(elem) {
+function AddCards() {                                                               //добавление первых шести карточек
+  for (let i = 0; i < 6; i++) {
+    const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+    cardElement.querySelector('.element__image').src = initialCards[i].link;
+    cardElement.querySelector('.element__text').textContent = initialCards[i].name;
+    cardElement.querySelector('.element__image').alt = initialCards[i].name;
+    cards.append(cardElement);
+  }
+
+
+  function AddLike() {                                                              //слушатель лайка
+    const likeButton = cardsContainer.querySelectorAll('.element__like-button');
+    const likeButtonArr = Array.from(likeButton);
+  likeButtonArr.forEach(function(elem) {
     elem.addEventListener('click', function() {
-      imagePopup.classList.add("popup_opened");
-      imagePopupImage.src = elem.getAttribute('src');
-      imagePopupText.textContent = elem.closest('div').lastElementChild.firstElementChild.textContent;
+      elem.classList.toggle("element__like-button_active");
+    });
+    });
+  };
+
+
+  const image = document.querySelectorAll('.element__image');                        //popup с картинкой
+  const imageArr = Array.from(image);
+  function popupImage() {                               
+  imageArr.forEach(function(elem) {
+  elem.addEventListener('click', function() {
+    openModalWindow(imagePopup);
+    imagePopupImage.src = elem.getAttribute('src');
+    imagePopupImage.alt = elem.getAttribute('alt');
+    imagePopupText.textContent = elem.closest('div').lastElementChild.firstElementChild.textContent;
   });
   });
   }
-function imageClosed() {
-      imagePopup.classList.remove("popup_opened");
-    } 
-    imageCloseButton.addEventListener('click', imageClosed); 
-function popupOpened() {                                   //popup
-    popupProfile.classList.add("popup_opened");
-    nameInput.value = nameInputNew.textContent;
-    jobInput.value = jobInputNew.textContent;
+
+
+  function AddDelete() {                                                                //удаление карточки 
+    const deleteButton = cardsContainer.querySelectorAll('.element__delete-button');
+  const deleteButtonArr = Array.from(deleteButton);
+  deleteButtonArr.forEach(function(elem) {
+    elem.addEventListener('click', function() {
+      elem.parentNode.remove();
+   });
+   });
+};
+popupImage()
+AddLike();
+AddDelete();
+}
+AddCards();
+imageCloseButton.addEventListener('click', ()=> (closeModalWindow(imagePopup))); 
+                            
+
+function openModalWindow(elem) {                                                     //popup
+  elem.classList.add("popup_opened");
 } 
-profileEditButton.addEventListener('click', popupOpened);
-function popupClosed() {
-    popupProfile.classList.remove("popup_opened");
+function inputValue() {
+  nameInput.value = nameInputNew.textContent;
+  jobInput.value = jobInputNew.textContent;
+}
+profileEditButton.addEventListener('click', ()=> (openModalWindow(popupProfile)));
+profileEditButton.addEventListener('click', inputValue);
+function closeModalWindow(elem) {
+    elem.classList.remove("popup_opened");
 } 
-closeButton.addEventListener('click', popupClosed); 
+closeButton.addEventListener('click', ()=> (closeModalWindow(popupProfile))); 
 function formSubmitHandler (evt) {
     evt.preventDefault();
     jobInputNew.textContent = jobInput.value;
@@ -118,89 +95,57 @@ function formSubmitHandler (evt) {
     popupClosed();
 }
 formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', ()=> (closeModalWindow(popupProfile)));
 
 
-function addedFormOpened() {                      //добавление карточки
-    addedForm.classList.add("popup_opened");
-    console.log('привет');
-} 
-addButton.addEventListener('click', addedFormOpened); 
-function addedFormClosed() {
-    addedForm.classList.remove("popup_opened");
-} 
-addedFormcloseButton.addEventListener('click', addedFormClosed); 
+function renderCard(elem) {                                                                //добавление карточки
+  cards.prepend(elem);
+}
+addButton.addEventListener('click', ()=> (openModalWindow(addedForm)));              
+addedFormcloseButton.addEventListener('click', ()=> (closeModalWindow(addedForm))); 
+const likeButton = cardsContainer.querySelectorAll('.element__like-button');
 function addedFormSubmitHandler (evt) {
   evt.preventDefault();
-  initialCards.unshift(    {
-    name: addName.value,
-    link: addLink.value
-    
-  })
   const cardElementNew = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElementNew.querySelector('.element__image').src = initialCards[0].link;
-  cardElementNew.querySelector('.element__text').textContent = initialCards[0].name;
-  cardElementNew.querySelector('.element__like-button').id = 'like-button';
-  cardElementNew.querySelector('.element__image').id = 'element-image';
-  cards.prepend(cardElementNew);
-  addedFormClosed();
+  cardElementNew.querySelector('.element__image').src = addLink.value;
+  cardElementNew.querySelector('.element__text').textContent = addName.value;
+
+
+  function AddLikeCard() {                                                                //слушатель лайка на новой карточке 
+    const likeButtonNew = cardsContainer.querySelector('.element__like-button');
+    likeButtonNew .addEventListener('click', function() {
+      likeButtonNew.classList.toggle("element__like-button_active");
+    });
+  };
+
+
+  function popupImageNew() {                                                              //popup с картинкой для новой карточки 
+    const imageNew = document.querySelector('.element__image');
+    imageNew.addEventListener('click', function() {
+        imagePopup.classList.add("popup_opened");
+        imagePopupImage.src = imageNew.getAttribute('src');
+        imagePopupText.textContent = imageNew.closest('div').lastElementChild.firstElementChild.textContent;
+    });
+    }
+
+    
+    function AddDeleteCard() {                                                            //удаление новой карточки 
+      const deleteButtonNew = document.querySelector('.element__delete-button');  
+        deleteButtonNew.addEventListener('click', function() { 
+          deleteButtonNew.parentNode.remove();
+        });
+        };
+  renderCard(cardElementNew);
+  closeModalWindow(addedForm);
+  AddLikeCard();
+  popupImageNew();
+  AddDeleteCard();
 };
 addedFormElement.addEventListener('submit', addedFormSubmitHandler);
-addedFormElement.addEventListener('submit', AddLikeCard);
-addedFormElement.addEventListener('submit', AddLike);
-addedFormElement.addEventListener('submit', AddDelete);
-addedFormElement.addEventListener('submit', AddDeleteCard);
-addedFormElement.addEventListener('submit', popupImageNew);
-const likeButton = cardsContainer.querySelectorAll('.element__like-button');
-const likeButtonArr = Array.from(likeButton);
-const deleteButton = cardsContainer.querySelectorAll('.element__delete-button');
-const deleteButtonArr = Array.from(deleteButton);
 
 
-function AddLikeCard() {                                                        //лайки
-  const likeButtonNew = document.querySelectorAll('#like-button');
-  const likeButtonNewArr = Array.from(likeButtonNew);
-  const likeButtonArrAll = likeButtonArr.concat(likeButtonNewArr.slice(0, 1));
-  likeButtonArrAll.forEach(function(elem) {
-    elem.addEventListener('click', function() {
-      if (elem.classList.contains("element__like-button_active")) {
-        elem.classList.remove("element__like-button_active");
-      }
-      else {
-      elem.classList.add("element__like-button_active");
-      }
-    });
-    });
-};
-function AddLike() {
-likeButtonArr.forEach(function(elem) {
-  elem.addEventListener('click', function() {
-    if (elem.classList.contains("element__like-button_active")) {
-      elem.classList.remove("element__like-button_active");
-    }
-    else {
-    elem.classList.add("element__like-button_active");
-    }
-  });
-  });
-};
-AddLike();
 
 
-function AddDeleteCard() {                                                        //удаление карточки 
-  const deleteButtonNew = document.querySelectorAll('#delete-button');  
-  const deleteButtonNewArr = Array.from(deleteButtonNew);
-  const deleteButtonArrAll = deleteButtonArr.concat(deleteButtonNewArr.slice(0, 1));
-  deleteButtonArrAll.forEach(function(elem) {
-    elem.addEventListener('click', function() { 
-      elem.parentNode.remove();
-    });
-    });
-    };
-function AddDelete() {
-deleteButtonArr.forEach(function(elem) {
-  elem.addEventListener('click', function() {
-    elem.parentNode.remove();
-  });
-  });
-};
-AddDelete();
+
+
+    
