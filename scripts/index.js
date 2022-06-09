@@ -1,13 +1,13 @@
 const profileEditButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
 const closeButton = document.querySelector('.popup__close-button');
-const addedFormcloseButton = document.querySelector('.popup_added-form__close-button');
+const addedFormcloseButton = document.querySelector('.addedForm__close-button');
 const nameInput = document.querySelector('.popup__name');
 const jobInput = document.querySelector('.popup__job');
 const jobInputNew = document.querySelector('.profile__description');
 const nameInputNew = document.querySelector('.profile__name');
 const formElement = document.querySelector('.popup__container');
-const addedFormElement = document.querySelector('.popup_added-form__container');
+const addedFormElement = document.querySelector('.addedForm__container');
 const cardName = document.querySelector('.element__text');
 const addedForm = document.querySelector('.popup_added-form');
 const addButton = document.querySelector('.profile__add-button');
@@ -15,9 +15,9 @@ const addName = document.querySelector('.popup__add-name');
 const addLink = document.querySelector('.popup__add-link');
 const cardsContainer = document.querySelector('.elements');
 const imagePopup = document.querySelector('.popup_imagePopup');
-const imagePopupImage = document.querySelector('.popup_imagePopup-image');
-const imageCloseButton = document.querySelector('.popup_imagePopup-close-button');
-const imagePopupText = document.querySelector('.popup_imagePopup-text');
+const imagePopupImage = document.querySelector('.imagePopup__image');
+const imageCloseButton = document.querySelector('.imagePopup__close-button');
+const imagePopupText = document.querySelector('.imagePopup__text');
 const cardTemplate = document.querySelector('#element').content; 
 const cards = document.querySelector('.elements');
 const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -128,7 +128,7 @@ function addedFormSubmitHandler (evt) {
     });
     }
 
-    
+
     function AddDeleteCard() {                                                            //удаление новой карточки 
       const deleteButtonNew = document.querySelector('.element__delete-button');  
         deleteButtonNew.addEventListener('click', function() { 
