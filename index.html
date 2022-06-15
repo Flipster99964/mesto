@@ -42,21 +42,27 @@
         </footer>
         <section class="popup popup_profile">
             <button type="button" class="popup__close-button"></button>
-            <form name="popup-form" class="popup__container">
+            <form name="popup-form" class="popup__container form" id="profile__container">
                 <h2 class="popup__text">Редактировать профиль</h2>
-                    <input class="popup__field-text popup__name" placeholder = "Имя" required name ="name">
-                    <input class="popup__field-text popup__job" placeholder = "Работа" required name ="job">
+                    <input id="nameProfile-input" class="popup__field-text popup__name form__input" placeholder = "Имя" required name ="name" minlength="2" maxlength="40">
+                    <span class="nameProfile-input-error form__input-error"></span>
+                    <input id="job-input" class="popup__field-text popup__job form__input" placeholder = "Работа" required name ="job" minlength="2" maxlength="200">
+                    <span class="job-input-error form__input-error"></span>
                 <button type="submit" class="popup__submit-button popup__submit-text">Сохранить</button>
             </form>
+            <div class="popup__bg"></div>
         </section>
         <section class="popup popup_added-form">
             <button type="button" class="popup__close-button" id="addedForm__close-button"></button>
-            <form name="added-form" class="popup__container" id="addedForm__container">
+            <form name="added-form" class="popup__container form" id="addedForm__container">
                 <h2 class="popup__text">Новое место</h2>
-                <input class="popup__field-text popup__add-name" placeholder = "Название" required name ="name">
-                <input class="popup__field-text popup__add-link" placeholder = "Ссылка на картинку" required name ="link">
+                <input id="name-input" class="popup__field-text popup__add-name form__input" placeholder = "Название" required name ="name" minlength="2" maxlength="30">
+                <span class="name-input-error form__input-error"></span>
+                <input id="url-input" class="popup__field-text popup__add-link form__input" placeholder = "Ссылка на картинку" required name ="link" type="url">
+                <span class="url-input-error form__input-error"></span>
                 <button type="submit" class="popup__submit-button popup__submit-text">Создать</button>
             </form>
+            <div class="popup__bg"></div>
         </section>
         <section class="popup imagePopup">
             <div class="imagePopup__container">
@@ -64,9 +70,11 @@
                 <img class="imagePopup__image">
                 <p class="imagePopup__text"></p>
             </div>
+            <div class="popup__bg"></div>
         </section>
     </div>
     <script src="scripts/cards.js"></script>
     <script src="scripts/index.js"></script>
+    <script src="scripts/validate.js"></script>
 </body>
 </html>
