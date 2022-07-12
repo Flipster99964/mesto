@@ -7,66 +7,34 @@ const jobInput = document.querySelector(".popup__job");
 const jobInputNew = document.querySelector(".profile__description");
 const nameInputNew = document.querySelector(".profile__name");
 const profileForm = document.querySelector(".popup__container");
-const inputElement = profileForm.querySelector('.popup__field-text')
 const addedFormElement = document.querySelector("#addedForm__container");
-const cardName = document.querySelector(".element__text");
 const addedForm = document.querySelector(".popup_added-form");
 const addButton = document.querySelector(".profile__add-button");
 const addName = document.querySelector(".popup__add-name");
 const addLink = document.querySelector(".popup__add-link");
 const cardsContainer = document.querySelector(".elements");
-const imagePopup = document.querySelector(".imagePopup");
-const imagePopupImage = document.querySelector(".imagePopup__image");
 const imageCloseButton = document.querySelector(".imagePopup__close-button");
-const imagePopupText = document.querySelector(".imagePopup__text");
-const cardTemplate = document.querySelector("#element").content;
-const cards = document.querySelector(".elements");
 const cardSubmitBtn = addedForm.querySelector('.popup__submit-button');
-
-
-
-function renderCard(name, link) {
-  //добавление карточки в разметку
-  cards.prepend(createCard(name, link));
+const settings = {
+formSelector: '.form',
+inputSelector: '.form__input',
+submitButtonSelector: '.popup__submit-button',
+inactiveButtonClass: 'popup__submit-button_inactive',
+inputErrorClass: 'form__input_type_error',
+errorClass: 'form__input-error_active'
 }
+import {initialCards} from '../scripts/cards.js';
+import {FormValidator} from '../scripts/FormValidator.js';
+import {Card} from '../scripts/Card.js';
 
-function createCard(name, link) {
-  //создание карточки
-  const cardElementNew = cardTemplate.querySelector(".element").cloneNode(true);
-  const imageNew = cardElementNew.querySelector(".element__image");
-  imageNew.src = link;
-  cardElementNew.querySelector(".element__text").textContent = name;
-  imageNew.alt = name;
+const renderInitialCards = (array) => {
+  array.forEach((item) => {
+    const card = new Card(item.name, item.link, "#element");
+    const cardElement = card.createCardElement();
 
- //слушатель imagePopup
-  imageNew.addEventListener("click", function () {
-    openModalWindow(imagePopup);
-    imagePopupImage.src = link;
-    imagePopupText.textContent = name;
-    imagePopupImage.alt = name;
-  });
-  const deleteButtonNew = cardElementNew.querySelector(
-".element__delete-button"
-  ); //слушатель иконки удаления
-  deleteButtonNew.addEventListener("click", function () {
-    deleteButtonNew.closest(".element").remove();
-  });
-
-  const likeButtonNew = cardElementNew.querySelector(".element__like-button"); //слушатель лайка
-  likeButtonNew.addEventListener("click", function () {
-    likeButtonNew.classList.toggle("element__like-button_active");
-  });
-
-  return cardElementNew;
+    cardsContainer.prepend(cardElement);
+  })
 }
-
-function addCards() {
-  //добавление первых шести карточек
-  for (let i = 0; i < 6; i++) {
-    renderCard(initialCards[i].name, initialCards[i].link);
-  }
-}
-addCards();
 
 
 function closeOpenedPopup() {                                //открытие и закрытие popup
@@ -117,7 +85,8 @@ addedFormcloseButton.addEventListener("click", () =>
 );
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  renderCard(addName.value, addLink.value);
+  const card = new Card(addName.value, addLink.value, "#element").createCardElement();
+  cardsContainer.prepend(card);
   closeModalWindow(addedForm);
   addedFormElement.reset();
   cardSubmitBtn.classList.add('popup__submit-button_inactive');
@@ -125,7 +94,14 @@ function handleCardFormSubmit(evt) {
 }
 addedFormElement.addEventListener("submit", handleCardFormSubmit);
 
+renderInitialCards(initialCards);
 
+const formEditProfileValidator = new FormValidator(settings, profileForm);
+formEditProfileValidator.enableValidation();
+
+const formAddNewCardValidator = new FormValidator(settings, addedForm);
+formAddNewCardValidator.enableValidation();
+export {openModalWindow, closeModalWindow};
 
 
 
