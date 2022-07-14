@@ -27,15 +27,19 @@ import {initialCards} from '../scripts/cards.js';
 import {FormValidator} from '../scripts/FormValidator.js';
 import {Card} from '../scripts/Card.js';
 
+// создание карточки 
+function createCard(name, link) {
+  const card = new Card(name, link, "#element");
+  const cardElement = card.createCardElement();
+  return cardElement
+}
+// добавление первых карточек
 const renderInitialCards = (array) => {
   array.forEach((item) => {
-    const card = new Card(item.name, item.link, "#element");
-    const cardElement = card.createCardElement();
-
+    const cardElement = createCard(item.name, item.link);
     cardsContainer.prepend(cardElement);
   })
 }
-
 
 function closeOpenedPopup() {                                //открытие и закрытие popup
   const openedPopup = document.querySelector('.popup_opened')
@@ -79,18 +83,17 @@ function handleProfileFormSubmit(evt) {
 }
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-addButton.addEventListener("click", () => openModalWindow(addedForm)); //добавление карточки
+addButton.addEventListener("click", () => openModalWindow(addedForm)); //форма добавления карточки
 addedFormcloseButton.addEventListener("click", () =>
   closeModalWindow(addedForm)
 );
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const card = new Card(addName.value, addLink.value, "#element").createCardElement();
-  cardsContainer.prepend(card);
+  const cardElement = createCard(addName.value, addLink.value);
+  cardsContainer.prepend(cardElement);
   closeModalWindow(addedForm);
   addedFormElement.reset();
-  cardSubmitBtn.classList.add('popup__submit-button_inactive');
-  cardSubmitBtn.setAttribute('disabled', 'true');
+  formAddNewCardValidator.toggleButtonState();
 }
 addedFormElement.addEventListener("submit", handleCardFormSubmit);
 
