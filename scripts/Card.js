@@ -1,5 +1,5 @@
 import {openModalWindow} from "./index.js";
-const imagePopup = document.querySelector(".imagePopup");
+import {imagePopup} from "./index.js";
 const imagePopupImage = document.querySelector(".imagePopup__image");
 const imagePopupText = document.querySelector(".imagePopup__text");
 export class Card{
@@ -18,7 +18,7 @@ export class Card{
 
     // метод слушателя лайка
   _handleLikeCard() {
-    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+    this._likeBtn.classList.toggle('element__like-button_active');
   }
     // метод слушателя кнопки удалить
   _handleDeleteCard() {
@@ -33,6 +33,8 @@ export class Card{
   }
     // Установка слушателей
   _setEventListeners() {
+    this._imageNew = this._element.querySelector(".element__image");
+    this._likeBtn = this._element.querySelector('.element__like-button');
       // слушатель кнопки лайк
     this._element.querySelector('.element__like-button').addEventListener('click', () => {
       this._handleLikeCard();
@@ -50,9 +52,8 @@ export class Card{
     createCardElement() {
       this._element = this._getTemplate();
       this._setEventListeners();
-      const imageNew = this._element.querySelector(".element__image");
-      imageNew.alt = `${this._name}`;
-      imageNew.src = this._link;
+      this._imageNew.alt = `${this._name}`;
+      this._imageNew.src = this._link;
       this._element.querySelector(".element__text").textContent = this._name;
       return this._element;
     }

@@ -14,7 +14,7 @@ const addName = document.querySelector(".popup__add-name");
 const addLink = document.querySelector(".popup__add-link");
 const cardsContainer = document.querySelector(".elements");
 const imageCloseButton = document.querySelector(".imagePopup__close-button");
-const cardSubmitBtn = addedForm.querySelector('.popup__submit-button');
+export const imagePopup = document.querySelector(".imagePopup");
 const settings = {
 formSelector: '.form',
 inputSelector: '.form__input',
