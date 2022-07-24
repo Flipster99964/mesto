@@ -23,22 +23,16 @@ inactiveButtonClass: 'popup__submit-button_inactive',
 inputErrorClass: 'form__input_type_error',
 errorClass: 'form__input-error_active'
 }
-import {initialCards} from '../scripts/cards.js';
-import {FormValidator} from '../scripts/FormValidator.js';
-import {Card} from '../scripts/Card.js';
+import {initialCards} from '../utils/cards.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {Card} from '../components/Card.js';
+import Section from "../components/Section.js";
 
 // создание карточки 
 function createCard(name, link) {
   const card = new Card(name, link, "#element");
   const cardElement = card.createCardElement();
   return cardElement
-}
-// добавление первых карточек
-const renderInitialCards = (array) => {
-  array.forEach((item) => {
-    const cardElement = createCard(item.name, item.link);
-    cardsContainer.prepend(cardElement);
-  })
 }
 
 function closeOpenedPopup() {                                //открытие и закрытие popup
@@ -97,7 +91,7 @@ function handleCardFormSubmit(evt) {
 }
 addedFormElement.addEventListener("submit", handleCardFormSubmit);
 
-renderInitialCards(initialCards);
+
 
 const formEditProfileValidator = new FormValidator(settings, profileForm);
 formEditProfileValidator.enableValidation();
@@ -105,6 +99,20 @@ formEditProfileValidator.enableValidation();
 const formAddNewCardValidator = new FormValidator(settings, addedForm);
 formAddNewCardValidator.enableValidation();
 export {openModalWindow, closeModalWindow};
+
+// отрисовка карточек из массива
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item.name, item.link, '#element', openModalWindow, closeModalWindow);
+    const cardElement = card.createCardElement();
+
+    cardsList.addItem(cardElement);
+  },
+}, cardsContainer);
+
+// загрузка карточек на страницу
+cardsList.renderItems();
 
 
 

@@ -1,5 +1,5 @@
-import {openModalWindow} from "./index.js";
-import {imagePopup} from "./index.js";
+import {openModalWindow} from "../pages/index.js";
+import {imagePopup} from "../pages/index.js";
 const imagePopupImage = document.querySelector(".imagePopup__image");
 const imagePopupText = document.querySelector(".imagePopup__text");
 export class Card{
