@@ -3,9 +3,9 @@ import {imagePopup} from "../pages/index.js";
 const imagePopupImage = document.querySelector(".imagePopup__image");
 const imagePopupText = document.querySelector(".imagePopup__text");
 export class Card{
-    constructor(name, link, cardTemplate) {
-      this._name = name;
-      this._link = link;
+    constructor(data, cardTemplate) {
+      this._name = data.name;
+      this._link = data.link;
       this._cardTemplate = cardTemplate;
     }
     _getTemplate() {

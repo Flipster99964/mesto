@@ -26,14 +26,31 @@ errorClass: 'form__input-error_active'
 import {initialCards} from '../utils/cards.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {Card} from '../components/Card.js';
-import Section from "../components/Section.js";
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 // создание карточки 
-function createCard(name, link) {
-  const card = new Card(name, link, "#element");
+function createCard(data) {
+  const card = new Card(data, "#element");
   const cardElement = card.createCardElement();
   return cardElement
 }
+
+// форма добавления карточки
+const addCardPopup = new PopupWithForm({
+  popupSelector: '.popup_added-form',
+  handleFormSubmit: (data) => {
+    cardsList.addItem(createCard(data));
+    addCardPopup.close();
+  }
+});
+// слушатели для формы добавления карточки
+addCardPopup.setEventListeners();
+
+addButton.addEventListener('click', () => {
+  addCardPopup.open();
+})
 
 function closeOpenedPopup() {                                //открытие и закрытие popup
   const openedPopup = document.querySelector('.popup_opened')
@@ -77,19 +94,6 @@ function handleProfileFormSubmit(evt) {
 }
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
-addButton.addEventListener("click", () => openModalWindow(addedForm)); //форма добавления карточки
-addedFormcloseButton.addEventListener("click", () =>
-  closeModalWindow(addedForm)
-);
-function handleCardFormSubmit(evt) {
-  evt.preventDefault();
-  const cardElement = createCard(addName.value, addLink.value);
-  cardsContainer.prepend(cardElement);
-  closeModalWindow(addedForm);
-  addedFormElement.reset();
-  formAddNewCardValidator.toggleButtonState();
-}
-addedFormElement.addEventListener("submit", handleCardFormSubmit);
 
 
 
@@ -104,7 +108,7 @@ export {openModalWindow, closeModalWindow};
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item.name, item.link, '#element', openModalWindow, closeModalWindow);
+    const card = new Card(item, '#element', openModalWindow, closeModalWindow);
     const cardElement = card.createCardElement();
 
     cardsList.addItem(cardElement);
