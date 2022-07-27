@@ -1,15 +1,10 @@
 const profileEditButton = document.querySelector(".profile__edit-button");
-const popupProfile = document.querySelector(".popup_profile");
-const profileCloseBtn = document.querySelector(".popup__close-button");
 const nameInput = document.querySelector(".popup__name");
 const jobInput = document.querySelector(".popup__job");
-const jobInputNew = document.querySelector(".profile__description");
-const nameInputNew = document.querySelector(".profile__name");
 const profileForm = document.querySelector(".popup__container");
 const addedForm = document.querySelector(".popup_added-form");
 const addButton = document.querySelector(".profile__add-button");
 const cardsContainer = document.querySelector(".elements");
-const imageCloseButton = document.querySelector(".imagePopup__close-button");
 export const imagePopup = document.querySelector(".imagePopup");
 const settings = {
 formSelector: '.form',
@@ -35,12 +30,10 @@ function createCard(data) {
       const viewImagePopup = new PopupWithImage('.imagePopup');
       viewImagePopup.setEventListeners();
       viewImagePopup.open(name, link);
-      console.log(data.name)
 }}, "#element");
   const cardElement = card.createCardElement();
   return cardElement
 }
-
 
 // форма добавления карточки
 const addCardPopup = new PopupWithForm({
@@ -57,57 +50,11 @@ addButton.addEventListener('click', () => {
   addCardPopup.open();
 })
 
-function closeOpenedPopup() {                                //открытие и закрытие popup
-  const openedPopup = document.querySelector('.popup_opened')
-  closeModalWindow(openedPopup);
-}
-function closeByEscape(evt) {     
-  if (evt.key === 'Escape') {
-    closeOpenedPopup()
-  }
-}
-function openModalWindow(elem) {
-  document.addEventListener("keydown", closeByEscape)
-  elem.querySelector(".popup__bg").addEventListener("click", closeOpenedPopup)
-  elem.classList.add("popup_opened");
-}
-function closeModalWindow(elem) {
-  document.removeEventListener("keydown", closeByEscape);
-  elem.querySelector(".popup__bg").removeEventListener("click", closeOpenedPopup);
-  elem.classList.remove("popup_opened");
-}
-
-
-function fillProfileInputs() {
-  nameInput.value = nameInputNew.textContent;
-  jobInput.value = jobInputNew.textContent;
-}
-function handleOpenProfileClick() {
-  openModalWindow(popupProfile);
-  fillProfileInputs();
-}
-profileEditButton.addEventListener("click", handleOpenProfileClick);
-profileCloseBtn.addEventListener("click", () => closeModalWindow(popupProfile));
-imageCloseButton.addEventListener("click", () => closeModalWindow(imagePopup));
-
-
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  jobInputNew.textContent = jobInput.value;
-  nameInputNew.textContent = nameInput.value;
-  closeModalWindow(popupProfile);
-}
-profileForm.addEventListener("submit", handleProfileFormSubmit);
-
-
-
-
 const formEditProfileValidator = new FormValidator(settings, profileForm);
 formEditProfileValidator.enableValidation();
 
 const formAddNewCardValidator = new FormValidator(settings, addedForm);
 formAddNewCardValidator.enableValidation();
-export {openModalWindow, closeModalWindow};
 
 // отрисовка карточек из массива
 const cardsList = new Section({
@@ -120,6 +67,34 @@ const cardsList = new Section({
 // загрузка карточек на страницу
 cardsList.renderItems();
 
+const userInfo = new UserInfo({
+  username: '.profile__name',
+  job: '.profile__description'
+});
 
+
+// создание попапа с формой редактирования профиля
+function fillEditProfileForm({ username, job }) {
+  nameInput.value = username;
+  jobInput.value = job;
+}
+
+const editProfilePopup = new PopupWithForm({
+  popupSelector: '.popup_profile',
+  handleFormSubmit: (dataForm) => {
+    userInfo.setUserInfo(dataForm);
+    editProfilePopup.close();
+  }
+});
+editProfilePopup.setEventListeners();
+// Обработчик кнопки Edit попапа редактирования профиля
+profileEditButton.addEventListener('click', () => {
+  const info = userInfo.getUserInfo();
+  fillEditProfileForm({
+    username: info.username,
+    job: info.job
+  });
+  editProfilePopup.open();
+});
 
     
