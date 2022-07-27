@@ -1,12 +1,9 @@
-import {openModalWindow} from "../pages/index.js";
-import {imagePopup} from "../pages/index.js";
-const imagePopupImage = document.querySelector(".imagePopup__image");
-const imagePopupText = document.querySelector(".imagePopup__text");
 export class Card{
-    constructor(data, cardTemplate) {
+    constructor({data, handleCardClick}, cardTemplate) {
       this._name = data.name;
       this._link = data.link;
       this._cardTemplate = cardTemplate;
+      this._handleCardClick = handleCardClick;
     }
     _getTemplate() {
       const cardElement = document
@@ -26,10 +23,7 @@ export class Card{
   }
     // метод слушателя открытия попапа просмотра изображения
   _handleOpenPopup() {
-    imagePopupImage.src = this._link;
-    imagePopupImage.alt = this._name;
-    imagePopupText.textContent = this._name;
-    openModalWindow(imagePopup);
+    this._handleCardClick(this._name, this._link);
   }
     // Установка слушателей
   _setEventListeners() {

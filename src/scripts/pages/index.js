@@ -1,17 +1,13 @@
 const profileEditButton = document.querySelector(".profile__edit-button");
 const popupProfile = document.querySelector(".popup_profile");
 const profileCloseBtn = document.querySelector(".popup__close-button");
-const addedFormcloseButton = document.querySelector("#addedForm__close-button");
 const nameInput = document.querySelector(".popup__name");
 const jobInput = document.querySelector(".popup__job");
 const jobInputNew = document.querySelector(".profile__description");
 const nameInputNew = document.querySelector(".profile__name");
 const profileForm = document.querySelector(".popup__container");
-const addedFormElement = document.querySelector("#addedForm__container");
 const addedForm = document.querySelector(".popup_added-form");
 const addButton = document.querySelector(".profile__add-button");
-const addName = document.querySelector(".popup__add-name");
-const addLink = document.querySelector(".popup__add-link");
 const cardsContainer = document.querySelector(".elements");
 const imageCloseButton = document.querySelector(".imagePopup__close-button");
 export const imagePopup = document.querySelector(".imagePopup");
@@ -29,13 +25,22 @@ import {Card} from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from "../components/PopupWithImage.js";
 
 // создание карточки 
 function createCard(data) {
-  const card = new Card(data, "#element");
+  const card = new Card({
+    data, 
+    handleCardClick: (name, link) => {
+      const viewImagePopup = new PopupWithImage('.imagePopup');
+      viewImagePopup.setEventListeners();
+      viewImagePopup.open(name, link);
+      console.log(data.name)
+}}, "#element");
   const cardElement = card.createCardElement();
   return cardElement
 }
+
 
 // форма добавления карточки
 const addCardPopup = new PopupWithForm({
@@ -108,10 +113,7 @@ export {openModalWindow, closeModalWindow};
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '#element', openModalWindow, closeModalWindow);
-    const cardElement = card.createCardElement();
-
-    cardsList.addItem(cardElement);
+    cardsList.addItem(createCard(item));
   },
 }, cardsContainer);
 
