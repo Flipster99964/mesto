@@ -19,7 +19,7 @@ export class Card{
   }
     // метод слушателя кнопки удалить
   _handleDeleteCard() {
-    this._element = null;
+    this._element.remove();
   }
     // метод слушателя открытия попапа просмотра изображения
   _handleOpenPopup() {
