@@ -19,7 +19,7 @@ export class Card{
   }
     // метод слушателя кнопки удалить
   _handleDeleteCard() {
-      this._element.remove();
+    this._element = null;
   }
     // метод слушателя открытия попапа просмотра изображения
   _handleOpenPopup() {
@@ -38,7 +38,7 @@ export class Card{
       this._handleDeleteCard();
     })
       // открытие попапа с картинкой
-    this._element.querySelector('.element__image').addEventListener('click', () => {
+    this._imageNew.addEventListener('click', () => {
       this._handleOpenPopup();
     })
       }
