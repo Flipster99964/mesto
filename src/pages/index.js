@@ -22,6 +22,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import "../pages/index.css";
+
 // создание карточки
 const viewImagePopup = new PopupWithImage(".imagePopup");
 viewImagePopup.setEventListeners();
@@ -73,6 +74,19 @@ const cardsList = new Section(
 
 // загрузка карточек на страницу
 cardsList.renderItems();
+
+/* Попап удаления карточки */
+const deleteCardPopup = new PopupWithForm({
+  popupSelector: ".deletePopup",
+  handleFormSubmit: (event) => {
+    console.log(event.target);
+  }
+});
+deleteCardPopup.setEventListeners();
+const deleteBtn = document.querySelector('.element__delete-button');
+deleteBtn.addEventListener('click', () => {
+  deleteCardPopup.open();
+});
 
 const userInfo = new UserInfo({
   username: ".profile__name",

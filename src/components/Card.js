@@ -34,9 +34,9 @@ export class Card{
       this._handleLikeCard();
     })
       // слушатель кнопки удаления карточки
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-      this._handleDeleteCard();
-    })
+   // this._element.querySelector('.element__delete-button').addEventListener('click', () => {
+    //  this._handleDeleteCard();
+    //})
       // открытие попапа с картинкой
     this._imageNew.addEventListener('click', () => {
       this._handleOpenPopup();

@@ -13,7 +13,7 @@ export const initialCards = [
     },
     {
       name: 'Лес гигантских деревьев',
-      link: 'https://image.tmdb.org/t/p/original/ki4eiIGNWovfEQm0EmB8P5p3WXq.jpg'
+      link: 'https://vgtimes.ru/uploads/gallery/main/137918/attackontitan_forestofgianttrees03.jpg'
     },
     {
       name: 'Подземный Город',
