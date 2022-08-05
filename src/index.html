@@ -13,7 +13,7 @@
         </header>
         <main>
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="аватар профиля">
+                <img class="profile__avatar" src="<%=require('./images/loading.png')%>" alt="аватар профиля">
                 <button class="profile__avatar-btn"></button>
                 <div class="profile__info">
                     <div class="profile__text">
@@ -49,7 +49,7 @@
                 <h2 class="popup__text">Редактировать профиль</h2>
                     <input id="nameProfile-input" class="popup__field-text popup__name form__input" placeholder = "Имя" required name ="name" minlength="2" maxlength="40">
                     <span class="nameProfile-input-error form__input-error"></span>
-                    <input id="job-input" class="popup__field-text popup__job form__input" placeholder = "Работа" required name ="job" minlength="2" maxlength="200">
+                    <input id="job-input" class="popup__field-text popup__job form__input" placeholder = "Работа" required name ="about" minlength="2" maxlength="200">
                     <span class="job-input-error form__input-error"></span>
                 <button type="submit" class="popup__submit-button popup__submit-text">Сохранить</button>
             </form>
@@ -92,7 +92,7 @@
               <form name="edit-avatar-form" action="#" class="form" novalidate>
                   <input
                     type="url"
-                    name="link"
+                    name="avatar"
                     id="avatar-input"
                     placeholder="Ссылка на картинку"
                     class="popup__field-text popup__add-link form__input"

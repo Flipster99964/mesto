@@ -33,7 +33,7 @@ export default class Api {
         headers: this._headers
       }).then(res => this._parseResponse(res));
     }
-    // Ставим лайк карточке
+    // Ставим лайк
   setLike(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
@@ -59,12 +59,12 @@ export default class Api {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          name: data.username,
-          about: data.job
+          name: data.name,
+          about: data.about
         })
       }).then(res => this._parseResponse(res));
     }
-    // Редактирование аватара пользователя через попап
+    // Редактирование аватара через попап
   editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',

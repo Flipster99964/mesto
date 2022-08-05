@@ -1,21 +1,10 @@
-const profileEditButton = document.querySelector(".profile__edit-button");
-const nameInput = document.querySelector(".popup__name");
-const jobInput = document.querySelector(".popup__job");
-const profileForm = document.querySelector(".popup__container");
-const addedForm = document.querySelector(".popup_added-form");
-const addedFormButton = document.querySelector(".profile__add-button");
-const buttonEditAvatar = document.querySelector(".profile__avatar-btn");
-const formEditAvatar = document.querySelector(".avatarPopup");
-const avatar = document.querySelector('.profile__avatar');
-export const imagePopup = document.querySelector(".imagePopup");
-const settings = {
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".popup__submit-button",
-  inactiveButtonClass: "popup__submit-button_inactive",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-};
+import {
+  profileEditButton, nameInput, jobInput, profileName,
+  profileDescription, profileForm, addedForm,
+  addedFormButton, buttonEditAvatar, formEditAvatar, avatar,
+  settings
+} from '../utils/constants.js';
+
 import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import Section from "../components/Section.js";
@@ -30,7 +19,6 @@ import "../pages/index.css";
 const viewImagePopup = new PopupWithImage(".imagePopup");
 viewImagePopup.setEventListeners();
 
-// функционал создания новой карточки
 const createCard = (data) => {
   const card = new Card({
     data: data,
@@ -75,20 +63,19 @@ const createCard = (data) => {
   return cardElement;
 };
 
-// Создание экземпляра класса Section
 const cardsList = new Section({
   renderer: (card) => {
     cardsList.addItem(createCard(card));
   },
 }, '.elements');
 
-// Создаем попап с подтверждением удаления карточки
+// Попап с подтверждением удаления карточки
 const deleteCardPopup = new PopupWithConfirmation({
   popupSelector: '.deletePopup'
 });
 deleteCardPopup.setEventListeners();
 
-// форма добавления карточки
+// Форма добавления карточки
 const addCardPopup = new PopupWithForm({
   popupSelector: ".popup_added-form",
   handleFormSubmit: (data) => {
@@ -106,10 +93,11 @@ const addCardPopup = new PopupWithForm({
       });
   },
 });
-// слушатели для формы добавления карточки
+// Слушатели для формы добавления карточки
 addCardPopup.setEventListeners();
 
 addedFormButton.addEventListener("click", () => {
+  formAddNewCardValidator.toggleButtonState();
   addCardPopup.open();
 });
 
@@ -152,7 +140,7 @@ const userInfo = new UserInfo({
   avatar: '.profile__avatar'
 });
 
-// создание попапа с формой редактирования профиля
+// Попапа с формой редактирования профиля
 function fillEditProfileForm({ username, job }) {
   nameInput.value = username;
   jobInput.value = job;
@@ -164,11 +152,13 @@ const editProfilePopup = new PopupWithForm({
     editProfilePopup.loading(true);
     api.editUserInfo(dataForm)
       .then((dataForm) => {
-        userInfo.setUserInfo(dataForm);
+        profileName.textContent = dataForm.name;
+        profileDescription.textContent = dataForm.about;
         editProfilePopup.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
+        console.log(dataForm)
       })
       .finally(() => {
         editProfilePopup.loading(false);
@@ -178,13 +168,22 @@ const editProfilePopup = new PopupWithForm({
 editProfilePopup.setEventListeners();
 
 
-
-// Создание попапа редактирования аватара пользователя
+// Попапа редактирования аватара пользователя
 const editAvatarPopup = new PopupWithForm({
   popupSelector: '.avatarPopup',
   handleFormSubmit: (data) => {
-    avatar.src = data.link;
-    editAvatarPopup.close();
+    editAvatarPopup.loading(true);
+    api.editAvatar(data)
+      .then((data) => {
+        avatar.src = data.avatar;
+        editAvatarPopup.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        editAvatarPopup.loading(false);
+      });
   }
 });
 editAvatarPopup.setEventListeners();
