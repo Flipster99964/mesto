@@ -43,3 +43,6 @@
 @import url(../blocks/element/__likes-number/element__likes-number.css);
 @import url(../blocks/element/__like-container/element__like-container.css);
 @import url(../blocks/profile/__avatar-btn/profile__avatar-btn.css);
+@import url(../blocks/element/__delete-button/_hidden/element__delete-button_hidden.css);
+@import url(../blocks/deletePopup/__close-button/deletePopup__close-button.css);
+@import url(../blocks/avatarPopup/__close-button/avatarPopup__close-button.css);

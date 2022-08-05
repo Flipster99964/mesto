@@ -8,7 +8,7 @@
     border: 0;
     background-repeat: no-repeat;
     background-position: center;
-    transition: .8s ease;
+    transition: .8s ease;   
   }
   
   .profile__avatar-btn:hover {

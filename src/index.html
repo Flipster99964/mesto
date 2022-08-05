@@ -13,12 +13,12 @@
         </header>
         <main>
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="аватар профиля">
+                <img class="profile__avatar" src="" alt="">
                 <button class="profile__avatar-btn"></button>
                 <div class="profile__info">
                     <div class="profile__text">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <p class="profile__description">Исследователь океана</p>
+                        <h1 class="profile__name"></h1>
+                        <p class="profile__description"></p>
                     </div>
                     <button type="button" class="profile__edit-button"></button>
                 </div>
@@ -76,7 +76,7 @@
             <div class="popup__bg"></div>
         </section>
         <section class="popup deletePopup">
-            <button type="button" class="popup__close-button"></button>
+            <button type="button" class="popup__close-button deletePopup__close-button"></button>
             <form class="popup__container form">
                 <h3 class="popup__text">Вы уверены?</h3>
                 <form name="delete-form" action="#" class="form" novalidate>
@@ -84,6 +84,24 @@
                 </form>
             </form>
               <div class="popup__bg"></div>
+        </section>
+        <section class="popup avatarPopup">
+            <button type="button" class="popup__close-button avatarPopup__close-button"></button>
+            <form class="popup__container form">
+              <h2 class="popup__text">Обновить аватар</h2>
+              <form name="edit-avatar-form" action="#" class="form" novalidate>
+                  <input
+                    type="url"
+                    name="link"
+                    id="url-input"
+                    placeholder="Ссылка на картинку"
+                    class="popup__field-text popup__add-link form__input"
+                    required>
+                  <span class="url-input-error form__input-error"></span>
+                  <button type="submit" class="popup__submit-button popup__submit-text">Сохранить</button>
+              </form>
+            </form>
+            <div class="popup__bg"></div>
         </section>
     </div>
 
