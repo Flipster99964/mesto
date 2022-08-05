@@ -13,7 +13,7 @@
         </header>
         <main>
             <section class="profile">
-                <img class="profile__avatar" src="" alt="">
+                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="аватар профиля">
                 <button class="profile__avatar-btn"></button>
                 <div class="profile__info">
                     <div class="profile__text">
@@ -93,11 +93,11 @@
                   <input
                     type="url"
                     name="link"
-                    id="url-input"
+                    id="avatar-input"
                     placeholder="Ссылка на картинку"
                     class="popup__field-text popup__add-link form__input"
                     required>
-                  <span class="url-input-error form__input-error"></span>
+                  <span class="avatar-input-error form__input-error"></span>
                   <button type="submit" class="popup__submit-button popup__submit-text">Сохранить</button>
               </form>
             </form>
