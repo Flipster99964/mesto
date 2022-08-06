@@ -8,10 +8,18 @@
     border: 0;
     background-repeat: no-repeat;
     background-position: center;
-    transition: .8s ease;   
+    transition: .8s ease;
   }
   
   .profile__avatar-btn:hover {
     opacity: .8;
     background-color: #000;
+  }
+  @media screen and (max-width: 880px) {
+    .profile__avatar-btn {
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
   }
