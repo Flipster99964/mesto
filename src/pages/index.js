@@ -152,8 +152,7 @@ const editProfilePopup = new PopupWithForm({
     editProfilePopup.loading(true);
     api.editUserInfo(dataForm)
       .then((dataForm) => {
-        profileName.textContent = dataForm.name;
-        profileDescription.textContent = dataForm.about;
+        userInfo.setUserInfo(dataForm);
         editProfilePopup.close();
       })
       .catch((err) => {
@@ -175,7 +174,7 @@ const editAvatarPopup = new PopupWithForm({
     editAvatarPopup.loading(true);
     api.editAvatar(data)
       .then((data) => {
-        avatar.src = data.avatar;
+        userInfo.setUserInfo(data);
         editAvatarPopup.close();
       })
       .catch((err) => {
